@@ -314,9 +314,7 @@
 }
 
 
-#let show_cv(json_path: "cv_data.json", lang: "en") = {
-  let path_json = sys.inputs.at("CV_JSON", default: json_path)
-  let data = json(path_json)
+#let show_cv(json_path, lang: "en") = {
   let doc_lang = sys.inputs.at("CV_LANG", default: lang)
   document_lang.update(x => doc_lang)
 
@@ -386,5 +384,3 @@
     },
   )
 }
-
-#show_cv()
