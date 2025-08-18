@@ -2,7 +2,7 @@
 
 #let document_lang = state("document_lang", "en")
 
-#let translate(val) = {
+#let __translate(val) = {
   if type(val) == dictionary {
     let is_val = val.at(document_lang.get(), default: none)
     if is_val != none {
@@ -13,8 +13,8 @@
   }
 }
 
-#let render_text(val) = {
-  let val = translate(val)
+#let __render-text(val) = {
+  let val = __translate(val)
   let render_text_str(val) = {
     let parse_url(value) = {
       let regex_full_url = regex("(.*)\\\href\{([^\{]*?)\}\{(.*)\}(.*)")
@@ -49,8 +49,8 @@
   eval(final_text, mode: "markup")
 }
 
-#let show_title(title) = {
-  let value = translate(title)
+#let __show-title(title) = {
+  let value = __translate(title)
   grid(
     columns: (auto, 1fr),
     align: (auto, horizon),
@@ -59,8 +59,8 @@
   )
 }
 
-#let show_title_bar(title) = {
-  let value = translate(title)
+#let __show-title-bar(title) = {
+  let value = __translate(title)
   stack(
     dir: ttb,
     [ == #value ],
@@ -69,7 +69,7 @@
   )
 }
 
-#let filter_by_lang(data_list, field) = {
+#let __filter-by-lang(data_list, field) = {
   let filter_lang(one_e) = {
     if type(one_e.at(field)) == str {
       return true
@@ -83,14 +83,14 @@
   data_list.filter(filter_lang)
 }
 
-#let show_contact(data) = {
+#let __show-contact(data) = {
   align(center, [
     #set text(15pt)
     *#data.firstname #data.lastname*
     #linebreak()
   ])
   if document_lang.get() == "en" {
-    align(center, translate(data.bio))
+    align(center, __translate(data.bio))
   } else {
     align(center, [
       #circle(height: 4.5cm, inset: -18pt, outset: 0pt)[
@@ -103,20 +103,20 @@
       ]
     ])
   }
-  show_title_bar(data.sidebar)
+  __show-title-bar(data.sidebar)
   let spacing = 0.4em
   align(right, stack(
     link("mailto:" + data.mail)[#data.mail],
     v(spacing),
     [
-      #translate(data.location)
+      #__translate(data.location)
       #fa-icon("location-dot")
     ],
     v(spacing),
     link("tel:" + data.phone)[#data.phone #fa-icon("phone")],
     v(spacing),
     [
-      #translate(data.driving)
+      #__translate(data.driving)
       #fa-icon("wpforms")
     ],
     v(spacing),
@@ -128,17 +128,17 @@
   ))
 }
 
-#let show_work((title, data)) = {
-  show_title(title)
+#let __show-work((title, data)) = {
+  __show-title(title)
   let render_element((date, description, name)) = {
-    let name = render_text(name)
+    let name = __render-text(name)
     (
-      align(top, translate(date)),
-      block([#underline(name)#linebreak() #render_text(description)#v(0.5em)]),
+      align(top, __translate(date)),
+      block([#underline(name)#linebreak() #__render-text(description)#v(0.5em)]),
     )
   }
-  let content = filter_by_lang(data, "date").map(render_element).flatten()
-  let rows = filter_by_lang(data, "date").map(e => auto)
+  let content = __filter-by-lang(data, "date").map(render_element).flatten()
+  let rows = __filter-by-lang(data, "date").map(e => auto)
   grid(
     columns: (0.20fr, 0.8fr),
     rows: rows,
@@ -149,10 +149,10 @@
   )
 }
 
-#let show_personal((title, data), (list_ident,)) = {
-  show_title(title)
-  let content = filter_by_lang(data, "description").map(e => {
-    render_text(e.description)
+#let __show-personal((title, data), (list_ident,)) = {
+  __show-title(title)
+  let content = __filter-by-lang(data, "description").map(e => {
+    __render-text(e.description)
   })
   list(
     marker: [--],
@@ -161,15 +161,15 @@
   )
 }
 
-#let show_irl_langs((title, data), (row_gutter,)) = {
-  show_title_bar(title)
+#let __show-irl-langs((title, data), (row_gutter,)) = {
+  __show-title-bar(title)
   let content = data
     .map(e => {
       (
-        block(strong(translate(e.name))),
+        block(strong(__translate(e.name))),
         block([
           #set text(10pt)
-          #render_text(e.level)
+          #__render-text(e.level)
         ]),
       )
     })
@@ -185,10 +185,10 @@
   )
 }
 
-#let show_project((title, data), (list_ident,)) = {
-  show_title(title)
-  let content = filter_by_lang(data, "description").map(e => {
-    render_text(e.description)
+#let __show-project((title, data), (list_ident,)) = {
+  __show-title(title)
+  let content = __filter-by-lang(data, "description").map(e => {
+    __render-text(e.description)
   })
   list(
     marker: [--],
@@ -197,8 +197,8 @@
   )
 }
 
-#let show_languages((title, data), (row_gutter)) = {
-  show_title_bar(title)
+#let __show-languages((title, data), (row_gutter)) = {
+  __show-title-bar(title)
   let content = data.map(e => [
     #e.name
   ])
@@ -213,8 +213,8 @@
 }
 
 
-#let show_tools((title, data), (row_gutter)) = {
-  show_title_bar(title)
+#let __show-tools((title, data), (row_gutter)) = {
+  __show-title-bar(title)
   let content = data.map(e => [
     #e.name
   ])
@@ -229,22 +229,22 @@
   )
 }
 
-#let show_school((title, data)) = {
-  show_title(title)
+#let __show-school((title, data)) = {
+  __show-title(title)
   for (date, name, location, description) in data [
   ]
-  let data = filter_by_lang(data, "date")
+  let data = __filter-by-lang(data, "date")
   let nb_item = data.len()
   let render_element((idx, (date, name, location, description))) = {
     (
-      align(top, translate(date)),
+      align(top, __translate(date)),
       stack(
         dir: ttb,
-        strong(render_text(name)),
+        strong(__render-text(name)),
         v(0.2em),
-        [#fa-icon("location-dot")#h(0.2em)#translate(location)],
+        [#fa-icon("location-dot")#h(0.2em)#__translate(location)],
         v(0.7em),
-        render_text(
+        __render-text(
           description,
         ),
         if idx != (nb_item - 1) { v(0.5em) },
@@ -252,7 +252,7 @@
     )
   }
   let content = data.enumerate().map(render_element).flatten()
-  let rows = filter_by_lang(data, "date").map(e => auto)
+  let rows = __filter-by-lang(data, "date").map(e => auto)
   grid(
     columns: (0.20fr, 0.80fr),
     rows: rows,
@@ -263,10 +263,10 @@
   )
 }
 
-#let interest(hobby) = {
+#let __interest(hobby) = {
   let (ico, name) = hobby
   let ico = lower(ico.slice(3))
-  let label = translate(name)
+  let label = __translate(name)
   align(center)[
     #stack(
       dir: ttb,
@@ -280,41 +280,42 @@
   ]
 }
 
-#let show_hobbies((title, data)) = {
-  show_title_bar(title)
+#let __show-hobbies((title, data)) = {
+  __show-title-bar(title)
   block(
     width: 100%,
     [
       #grid(
         columns: (1fr, 1fr),
         align: horizon,
-        interest(data.at(0)), interest(data.at(1)),
+        __interest(data.at(0)), __interest(data.at(1)),
       )
       #align(center)[
-        #interest(data.at(2))
+        #__interest(data.at(2))
       ]
     ],
   )
 }
 
 
-#let show_page_title(data) = {
+#let __show-page-title(data) = {
   align(
     center,
     stack(
       dir: ttb,
       block[
         #set text(15pt)
-        = #translate(data.title)
+        = #__translate(data.title)
       ],
       v(0.8em),
-      translate(data.subtitle),
+      __translate(data.subtitle),
     ),
   )
 }
 
-
-#let show-cv(json_path, lang: "en") = {
+/// show-cv function build the complete cv from the data
+/// - data (dictionary): Structure that contains the cv data
+#let show-cv(data, lang: "en") = {
   let doc_lang = sys.inputs.at("CV_LANG", default: lang)
   document_lang.update(x => doc_lang)
 
@@ -360,11 +361,11 @@
         size: 12pt,
       )
       align(horizon, [
-        #show_contact(data.me)
-        #show_languages(data.languages, (row_gutter,))
-        #show_tools(data.tools, (row_gutter,))
-        #show_irl_langs(data.langs, (row_gutter,))
-        #show_hobbies(data.hobbies)
+        #__show-contact(data.me)
+        #__show-languages(data.languages, (row_gutter,))
+        #__show-tools(data.tools, (row_gutter,))
+        #__show-irl-langs(data.langs, (row_gutter,))
+        #__show-hobbies(data.hobbies)
       ])
     },
     align(center + horizon, [
@@ -375,11 +376,11 @@
         size: 10pt,
       )
       align(horizon, [
-        #show_page_title(data.me)
-        #show_school(data.school)
-        #show_work(data.work)
-        #show_project(data.project, (row_gutter,))
-        #show_personal(data.personal, (list_ident,))
+        #__show-page-title(data.me)
+        #__show-school(data.school)
+        #__show-work(data.work)
+        #__show-project(data.project, (row_gutter,))
+        #__show-personal(data.personal, (list_ident,))
       ])
     },
   )
