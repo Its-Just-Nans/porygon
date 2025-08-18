@@ -8,6 +8,5 @@ license = "MIT"
 description = "Create a CV from a JSON file"
 keywords = ["CV", "Curriculum Vitae", "json"]
 categories = ["cv"]
-disciplines = []
 exclude = ["demo"]
 repository = "https://github.com/Its-Just-Nans/typst-json-curriculum-vitae"
