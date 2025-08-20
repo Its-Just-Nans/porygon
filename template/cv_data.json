@@ -1,6 +1,6 @@
 {
     "filename": "NOTHING",
-    "cv_langs": ["fr", "en"],
+    "cv_langs": [ "en"],
     "margin": {
         "top": "0.5cm",
         "bottom": "0cm"
@@ -80,7 +80,7 @@
         "data": [
             {
                 "description": {
-                    "fr": "Typst enjoyer"
+                    "en": "Typst enjoyer"
                 }
             }
         ],
