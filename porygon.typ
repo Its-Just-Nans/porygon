@@ -272,6 +272,7 @@
       dir: ttb,
       circle(radius: 0.5cm, fill: rgb("4a90d9"))[
         #set align(center + horizon)
+        #v(-0.4em)
         #text(size: 1em, fill: white)[#fa-icon(ico)]
       ],
       v(0.4em),
