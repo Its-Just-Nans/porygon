@@ -91,7 +91,7 @@
   ])
   if __document_lang.get() == "en" {
     align(center, __translate(data.bio))
-  } else {
+  } else if data.at("picture", default: none) != none {
     align(center, [
       #circle(height: 4.5cm, inset: -18pt, outset: 0pt)[
         #set align(center + horizon)
@@ -163,7 +163,7 @@
 
 #let __show-irl-langs((title, data), (row_gutter,)) = {
   __show-title-bar(title)
-  let content = data
+  let content = __filter-by-lang(data, "name")
     .map(e => {
       (
         block(strong(__translate(e.name))),
@@ -283,9 +283,10 @@
 
 #let __show-hobbies((title, data)) = {
   __show-title-bar(title)
+  let data_filtered = __filter-by-lang(data, "name")
   let gen_interest(idx) = {
-    if data.len() > idx {
-      __interest(data.at(idx))
+    if data_filtered.len() > idx {
+      __interest(data_filtered.at(idx))
     }
     []
   }

@@ -65,7 +65,6 @@
         },
         "mail": "mail@domain.com",
         "phone": "+1 ",
-        "picture": "demo/photo.jpg",
         "sidebar": "Contact",
         "subtitle": {
             "optional": true
