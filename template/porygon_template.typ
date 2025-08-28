@@ -1,4 +1,4 @@
-#import "../porygon.typ": show-cv
+#import "@preview/porygon:0.1.0": show-cv
 
 
 #let path_json = sys.inputs.at("CV_JSON", default: "cv_data.json")

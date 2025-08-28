@@ -1,6 +1,9 @@
 # porygon-template
 
 ```sh
-typst compile porygon_template.typ  --root ..
-typst compile porygon_template.typ  --root .. -f png
+# compile
+typst compile porygon_template.typ
+
+# export thumbnail as png
+typst compile porygon_template.typ -f png
 ```
