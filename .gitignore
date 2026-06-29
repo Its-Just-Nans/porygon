@@ -1,1 +1,5 @@
-demo/
+*.pdf
+cv.typ
+cv_data.json
+*.png
+*.jpg
