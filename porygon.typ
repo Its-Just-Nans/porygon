@@ -1,4 +1,4 @@
-#import "@preview/fontawesome:0.6.0": fa-icon
+#import "@preview/fontawesome:0.6.1": fa-icon
 
 #let __document_lang = state("document_lang", "en")
 
@@ -117,7 +117,7 @@
     v(spacing),
     [
       #__translate(data.driving)
-      #fa-icon("wpforms")
+      #fa-icon(lower(data.driving.icon.slice(3)))
     ],
     v(spacing),
     link(data.website)[#data.website #fa-icon("home")],
@@ -386,8 +386,8 @@
       )
       align(horizon, [
         #__show-page-title(data.me)
-        #__show-school(data.school)
         #__show-work(data.work)
+        #__show-school(data.school)
         #__show-project(data.project, (row_gutter,))
         #__show-personal(data.personal, (list_ident,))
       ])
