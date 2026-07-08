@@ -70,12 +70,14 @@
 }
 
 #let __filter-by-lang(data_list, field) = {
-  let filter_lang(one_e) = {
-    if type(one_e.at(field)) == str {
-      return true
-    } else if one_e.at("optional", default: none) == true {
+  let filter_lang(one_element) = {
+    if one_element.at("hidden", default: none) == true {
       return false
-    } else if one_e.at(field).keys().contains(__document_lang.get()) {
+    } else if type(one_element.at(field)) == str {
+      return true
+    } else if one_element.at("optional", default: none) == true {
+      return false
+    } else if one_element.at(field).keys().contains(__document_lang.get()) {
       return true
     }
     return false
@@ -109,14 +111,14 @@
     link("mailto:" + data.mail)[#data.mail],
     v(spacing),
     [
-      #__translate(data.location)
+      #__render-text(data.location)
       #fa-icon("location-dot")
     ],
     v(spacing),
     link("tel:" + data.phone)[#data.phone #fa-icon("phone")],
     v(spacing),
     [
-      #__translate(data.driving)
+      #__render-text(data.driving)
       #fa-icon(lower(data.driving.icon.slice(3)))
     ],
     v(spacing),
@@ -133,7 +135,7 @@
   let render_element((date, description, name)) = {
     let name = __render-text(name)
     (
-      align(top, __translate(date)),
+      align(top, __render-text(date)),
       block([#underline(name)#linebreak() #__render-text(description)#v(0.5em)]),
     )
   }
@@ -231,18 +233,20 @@
 
 #let __show-school((title, data)) = {
   __show-title(title)
-  for (date, name, location, description) in data [
-  ]
   let data = __filter-by-lang(data, "date")
   let nb_item = data.len()
   let render_element((idx, (date, name, location, description))) = {
     (
-      align(top, __translate(date)),
+      align(top, [
+        #__render-text(date)
+        #linebreak()
+        #fa-icon("location-dot")#h(0.2em)#__render-text(location)
+      ]),
       stack(
         dir: ttb,
         strong(__render-text(name)),
-        v(0.2em),
-        [#fa-icon("location-dot")#h(0.2em)#__translate(location)],
+        // v(0.2em),
+        // [#fa-icon("location-dot")#h(0.2em)#__translate(location)],
         v(0.7em),
         __render-text(
           description,
