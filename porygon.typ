@@ -132,10 +132,15 @@
 
 #let __show-work((title, data)) = {
   __show-title(title)
-  let render_element((date, description, name)) = {
+  let render_element((date, description, name, ..obj)) = {
     let name = __render-text(name)
+    let subdate = obj.at("subdate", default: "")
     (
-      align(top, __render-text(date)),
+      align(top, [
+        #underline(__render-text(date))
+        #linebreak()
+        #__render-text(subdate)
+      ]),
       block([#underline(name)#linebreak() #__render-text(description)#v(0.5em)]),
     )
   }
