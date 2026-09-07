@@ -40,13 +40,24 @@
     let remove_new_line(val_li) = {
       return val_li.replace("\\newline", " #linebreak() ")
     }
+    let parse_fa_icon(val) = {
+      let regex_fa = regex("(.*)\\\\fa([A-Za-z0-9]+)(.*)")
+      let mat = val.match(regex_fa)
+
+      if mat == none {
+        return val
+      }
+
+      return mat.captures.at(0) + "#fa-icon(\"" + lower(mat.captures.at(1)) + "\")" + mat.captures.at(2)
+    }
     let text = remove_new_line(val)
     let text = parse_url(text)
     let text = parse_textbf(text)
+    let text = parse_fa_icon(text)
     return text
   }
   let final_text = render_text_str(val)
-  eval(final_text, mode: "markup")
+  eval(final_text, mode: "markup", scope: (fa-icon: fa-icon))
 }
 
 #let __show-title(title) = {
@@ -348,7 +359,6 @@
     date: datetime.today(),
   )
 
-
   set text(
     font: "Chivo",
   )
@@ -368,7 +378,6 @@
   set par(
     leading: 0.55em,
   )
-
 
   grid(
     columns: (0.27fr, 4pt, 0.6fr),
