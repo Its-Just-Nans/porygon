@@ -3,3 +3,4 @@ cv.typ
 cv_data.json
 *.png
 *.jpg
+!screenshots/*.png
