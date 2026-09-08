@@ -48,7 +48,8 @@
             "en": "I <3 Typst"
         },
         "driving": {
-            "en": "Driving Licence"
+            "en": "Driving Licence",
+            "icon": "\\faCar"
         },
         "firstname": "firstname",
         "github": {
@@ -81,6 +82,16 @@
                 "description": {
                     "en": "Typst enjoyer"
                 }
+            },
+            {
+                "description": {
+                    "en": "Git enjoyer"
+                }
+            },
+            {
+                "description": {
+                    "en": "Linux enjoyer"
+                }
             }
         ],
         "title": {
@@ -89,6 +100,11 @@
     },
     "project": {
         "data": [
+            {
+                "description": {
+                    "en": "Playing with Typst"
+                }
+            },
             {
                 "description": {
                     "en": "Playing with Raspberry Pi"
@@ -114,6 +130,20 @@
                 "name": {
                     "en": "High School"
                 }
+            },
+            {
+                "date": {
+                    "en": "2013"
+                },
+                "description": {
+                    "en": "Learning so much"
+                },
+                "location": {
+                    "en": "Antartica"
+                },
+                "name": {
+                    "en": "University"
+                }
             }
         ],
         "title": {
@@ -124,6 +154,9 @@
         "data": [
             {
                 "name": "GIT"
+            },
+            {
+                "name": "Linux"
             }
         ],
         "title": {
@@ -138,6 +171,61 @@
                 },
                 "description": {
                     "en": "Typst coder"
+                },
+                "name": {
+                    "en": "Summer job"
+                }
+            },
+            {
+                "date": {
+                    "en": "July 2021"
+                },
+                "description": {
+                    "en": "Linux kernel stuff"
+                },
+                "name": {
+                    "en": "Summer job"
+                }
+            },
+            {
+                "date": {
+                    "en": "July 2022"
+                },
+                "description": {
+                    "en": "Driver kernel stuff"
+                },
+                "name": {
+                    "en": "Summer job"
+                }
+            },
+            {
+                "date": {
+                    "en": "July 2022"
+                },
+                "description": {
+                    "en": "Low level stuff"
+                },
+                "name": {
+                    "en": "Summer job"
+                }
+            },
+            {
+                "date": {
+                    "en": "July 2023"
+                },
+                "description": {
+                    "en": "High level stuff"
+                },
+                "name": {
+                    "en": "Summer job"
+                }
+            },
+            {
+                "date": {
+                    "en": "July 2021"
+                },
+                "description": {
+                    "en": "Linux kernel stuff"
                 },
                 "name": {
                     "en": "Summer job"

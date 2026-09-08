@@ -1,4 +1,4 @@
-#import "@preview/fontawesome:0.6.1": fa-icon
+#import "@preview/fontawesome:0.6.2": fa-icon
 
 #let __document_lang = state("document_lang", "en")
 
