@@ -1,6 +1,6 @@
 [package]
 name = "porygon"
-version = "0.1.0"
+version = "0.1.1"
 compiler = "0.13.0"
 entrypoint = "porygon.typ"
 authors = ["n4n5 <its.just.n4n5@gmail.com>"]
