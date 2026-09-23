@@ -256,7 +256,14 @@
       align(top, [
         #__render-text(date)
         #linebreak()
-        #fa-icon("location-dot")#h(0.2em)#__render-text(location)
+        #fa-icon("location-dot")#h(0.2em)
+        #box(baseline: -0.05em)[
+          #text(size: 0.9em)[
+            #__render-text(
+              location,
+            )
+          ]
+        ]
       ]),
       stack(
         dir: ttb,
@@ -267,7 +274,7 @@
         __render-text(
           description,
         ),
-        if idx != (nb_item - 1) { v(0.5em) },
+        if idx != (nb_item - 1) { v(1em) },
       ),
     )
   }
@@ -407,7 +414,7 @@
         #__show-work(data.work)
         #__show-school(data.school)
         #__show-project(data.project, (row_gutter,))
-        #__show-personal(data.personal, (list_ident,))
+        #__show-personal(data.personal, (row_gutter,))
       ])
     },
   )
